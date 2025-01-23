@@ -1,31 +1,67 @@
-export default function ProjectsPage() {
+export default function Projects() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-8">Projects</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* Placeholder project cards */}
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:shadow-lg transition"
-          >
-            <div className="aspect-video bg-gray-100 dark:bg-gray-800 rounded-md mb-4" />
-            <h2 className="text-xl font-semibold mb-2">Project {i}</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
-              A brief description of the project and its key features.
-            </p>
-            <div className="flex gap-2">
-              <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-sm rounded">
-                React
-              </span>
-              <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 text-sm rounded">
-                Node.js
-              </span>
+    <main className="min-h-screen p-8 md:p-24">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold mb-12">Projects</h1>
+        
+        <div className="space-y-12">
+          {/* Arboren Project */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-bold mb-4">Arboren: AI-Powered Geospatial Analysis Platform</h2>
+            <p className="text-gray-600 mb-6">Nov 2024 - Present</p>
+            <div className="prose max-w-none">
+              <p className="mb-4">
+                Led development of Arboren, winning 1st at the Chan Zuckerberg Initiative hack for social impact.
+                Presented at UN COP16 with an innovative AI platform combining LLMs with geospatial visualization.
+              </p>
+              
+              <h3 className="text-xl font-semibold mt-6 mb-3">Key Features</h3>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Intelligent dataset discovery and integration using LLMs</li>
+                <li>Interactive visualization layer combining multiple data sources</li>
+                <li>Context-aware AI assistant for data analysis</li>
+                <li>Natural language interface for exploring relationships</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mt-6 mb-3">Impact</h3>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Demonstrated correlation analysis between desertification and conflict zones</li>
+                <li>Enabled rapid integration of diverse data sources for policy makers</li>
+                <li>Streamlined environmental research workflows</li>
+                <li>Selected for presentation at UNCCD COP16</li>
+              </ul>
             </div>
           </div>
-        ))}
+
+          {/* Vaulter Project */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-bold mb-4">Vaulter - Obsidian Notes AI Integration</h2>
+            <p className="text-gray-600 mb-6">Dec 2023 - Jun 2024</p>
+            <div className="prose max-w-none">
+              <p className="mb-4">
+                An Obsidian plugin spun out of the AI for Thought hackathon @AGI house, using LlamaIndex 
+                and large language models to index personal notes and generate contextual profiles.
+              </p>
+              <p className="mb-4">
+                Bridges the gap between personal note-taking and AI assistance, allowing users' thoughts 
+                to be queried as part of the autonomous agents toolchain.
+              </p>
+            </div>
+          </div>
+
+          {/* Antarctic Research Project */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-bold mb-4">Meltwater Detection in Antarctic Ice Sheets</h2>
+            <p className="text-gray-600 mb-6">McGill University Research Project</p>
+            <div className="prose max-w-none">
+              <p className="mb-4">
+                Development of a Convolutional Neural Network architecture for automated feature 
+                cataloguing in the Antarctic ice sheets using optical satellite albedo data.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  )
+    </main>
+  );
 } 

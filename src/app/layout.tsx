@@ -1,28 +1,25 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navigation/Navbar";
+import Navigation from "@/components/Navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Personal Portfolio",
-  description: "A showcase of my projects, experiences, and skills",
-  keywords: ["portfolio", "projects", "developer", "software engineer"],
+  title: "Clovis Vinant-Tang",
+  description: "Personal portfolio and research showcase",
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}>
-        <Navbar />
-        <main className="min-h-screen pt-16">
-          {children}
-        </main>
+    <html lang="en" className="dark">
+      <body className={`${inter.className} bg-gray-900 text-white min-h-screen`}>
+        <Navigation />
+        {children}
       </body>
     </html>
   );
