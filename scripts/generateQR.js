@@ -15,7 +15,7 @@ async function generateCustomQR() {
       quality: 0.95,
       margin: 1,
       color: {
-        dark: '#FF4500', // Pure orange-red
+        dark: '#3B82F6', // blue-500 from Tailwind
         light: '#00000000' // Transparent background
       },
       width: 1000,
@@ -25,24 +25,24 @@ async function generateCustomQR() {
     const canvas = createCanvas(1200, 1200);
     const ctx = canvas.getContext('2d');
 
-    // Fill with dark background
-    ctx.fillStyle = '#000B1F'; // Very dark blue
+    // Fill with dark background (matching website)
+    ctx.fillStyle = '#111827'; // gray-900 from Tailwind
     ctx.fillRect(0, 0, 1200, 1200);
 
     // Add galaxy swirls first (so they appear behind stars)
     for (let i = 0; i < 8; i++) {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
-      const radius = Math.random() * 100 + 50; // Larger swirls
+      const radius = Math.random() * 100 + 50;
       
       // Create a spiral effect
       const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
       if (i % 2 === 0) {
-        gradient.addColorStop(0, 'rgba(255, 69, 0, 0.15)'); // Orange swirl
-        gradient.addColorStop(0.5, 'rgba(255, 69, 0, 0.05)');
+        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)'); // blue-500
+        gradient.addColorStop(0.5, 'rgba(59, 130, 246, 0.05)');
       } else {
-        gradient.addColorStop(0, 'rgba(0, 150, 255, 0.1)'); // Blue swirl
-        gradient.addColorStop(0.5, 'rgba(0, 150, 255, 0.03)');
+        gradient.addColorStop(0, 'rgba(147, 197, 253, 0.1)'); // blue-300
+        gradient.addColorStop(0.5, 'rgba(147, 197, 253, 0.03)');
       }
       gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
       
@@ -67,7 +67,7 @@ async function generateCustomQR() {
       // Add occasional colored stars
       if (i % 10 === 0) {
         ctx.beginPath();
-        ctx.fillStyle = i % 20 === 0 ? '#FF4500' : '#0096FF';
+        ctx.fillStyle = i % 20 === 0 ? '#3B82F6' : '#93C5FD'; // blue-500 and blue-300
         ctx.arc(x + 3, y + 3, size * 1.8, 0, Math.PI * 2);
         ctx.fill();
       }
@@ -85,19 +85,19 @@ async function generateCustomQR() {
     // Draw QR code on canvas
     ctx.drawImage(qrImage, x, y, qrSize, qrSize);
 
-    // Add orange glow effect to the QR code
+    // Add primary blue glow effect
     ctx.globalCompositeOperation = 'screen';
-    ctx.shadowColor = '#FF4500';
+    ctx.shadowColor = '#3B82F6'; // blue-500
     ctx.shadowBlur = 15;
     ctx.drawImage(qrImage, x, y, qrSize, qrSize);
     
-    // Add a second layer of orange glow for intensity
+    // Add a second layer of glow for intensity
     ctx.shadowBlur = 8;
     ctx.globalAlpha = 0.7;
     ctx.drawImage(qrImage, x, y, qrSize, qrSize);
 
-    // Add subtle blue accent glow
-    ctx.shadowColor = '#0096FF';
+    // Add lighter blue accent glow
+    ctx.shadowColor = '#93C5FD'; // blue-300
     ctx.shadowBlur = 4;
     ctx.globalAlpha = 0.3;
     ctx.drawImage(qrImage, x, y, qrSize, qrSize);
