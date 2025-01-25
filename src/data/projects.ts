@@ -15,12 +15,11 @@ export const projectData: {
     },
     {
       title: "Arboren",
-      description: "AI-powered geospatial analysis platform for environmental policy",
+      description: "AI-powered geospatial analysis platform for UN policy",
       award: "1st Place @AI For Good",
       event: "Chan Zuckerberg Initiative+ UN CCD",
       tags: ["AI", "GIS", "Policy"],
       links: {
-        event: "https://lu.ma/454w7i8p?tk=E7hKBg",
         github: "https://github.com/yourusername/arboren",
         demo: "https://arboren-ai.com/home",
         devpost: "https://devpost.com/software/green-policy-agent",
@@ -83,7 +82,7 @@ export const projectData: {
       links: {
         github: "https://github.com/Sivolc2/accelerate_sf_hackathon"
       },
-      tags: ["Government", "Transparency"]
+      tags: ["Governance", "Transparency"]
     },
     {
       title: "OTT - Organizational Transparency Tools",

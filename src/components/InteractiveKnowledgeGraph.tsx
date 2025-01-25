@@ -203,17 +203,26 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
 
   const handleResetView = () => {
     if (forceRef.current) {
+      // First fit to view
       forceRef.current.zoomToFit(400);
+      
+      // Then zoom in by 20%
+      setTimeout(() => {
+        const currentScale = forceRef.current?.zoom();
+        if (currentScale) {
+          forceRef.current?.zoom(currentScale * 1.6, 400);
+        }
+      }, 450); // Slightly less than the initial animation time
     }
   };
 
   useEffect(() => {
     if (forceRef.current) {
       // Adjust forces for better layout
-      forceRef.current.d3Force('charge')?.strength(-1000);
+      forceRef.current.d3Force('charge')?.strength(-1500);
       forceRef.current.d3Force('link')?.distance((link: GraphLink) => {
         switch (link.type) {
-          case 'central-category': return 300;
+          case 'central-category': return 250;
           case 'category-project': return 200;
           case 'project-tag': return 120;
           default: return 150;
@@ -225,12 +234,29 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
       forceRef.current.d3Force('radial', d3.forceRadial((node: GraphNode) => {
         switch (node.group) {
           case 'central': return 0;
-          case 'category': return 300;
-          case 'project': return 500;
-          case 'tag': return 650;
-          default: return 300;
+          case 'category': return 250;
+          case 'project': return 450;
+          case 'tag': return 600;
+          default: return 250;
         }
-      }).strength(0.6));
+      }).strength(0.8));
+
+      // Add rotation effect
+      let angle = 0;
+      const rotationSpeed = 0.001; // Adjust this value to control rotation speed
+
+      forceRef.current.d3Force('rotation', () => {
+        angle += rotationSpeed;
+        graphData.nodes.forEach((node: GraphNode) => {
+          if (node.group !== 'central') { // Don't rotate the central node
+            const distance = Math.sqrt(Math.pow((node.x || 0), 2) + Math.pow((node.y || 0), 2));
+            const currentAngle = Math.atan2(node.y || 0, node.x || 0);
+            const newAngle = currentAngle + rotationSpeed;
+            node.x = distance * Math.cos(newAngle);
+            node.y = distance * Math.sin(newAngle);
+          }
+        });
+      });
 
       // Add a small delay to ensure the graph is properly initialized
       const timer = setTimeout(() => {
@@ -239,7 +265,7 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
 
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [graphData.nodes]);
 
   return (
     <div className="relative bg-gray-900 p-6 border border-blue-500 rounded-lg overflow-hidden" ref={containerRef}>
@@ -280,14 +306,34 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
                 node.group === 'central' ? 24 / globalScale :
                 node.group === 'category' ? 16 / globalScale :
                 12 / globalScale;
+              
+              // Add text shadow for better visibility
               ctx.font = `${node.group === 'central' ? 'bold' : 'normal'} ${fontSize}px Inter`;
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
+              
+              // Draw text shadow
+              ctx.fillStyle = 'rgba(0,0,0,0.8)';
+              ctx.fillText(
+                label,
+                node.x || 0,
+                (node.y || 0) + (
+                  node.group === 'central' ? 45 :
+                  node.group === 'category' ? 35 :
+                  20
+                ) + 1
+              );
+              
+              // Draw main text
               ctx.fillStyle = 'white';
               ctx.fillText(
                 label,
                 node.x || 0,
-                (node.y || 0) + (node.group === 'central' ? 35 : node.group === 'category' ? 25 : 15)
+                (node.y || 0) + (
+                  node.group === 'central' ? 45 :
+                  node.group === 'category' ? 35 :
+                  20
+                )
               );
             }}
           />

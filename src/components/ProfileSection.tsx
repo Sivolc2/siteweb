@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Twitter, Github, Linkedin } from 'lucide-react';
+import { X, Github, Linkedin } from 'lucide-react';
 
 export const ProfileSection = () => (
   <div className="bg-gray-900 p-6 border border-blue-500 rounded-lg">
@@ -31,7 +31,7 @@ export const ProfileSection = () => (
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-300 transition-colors"
           >
-            <Twitter className="w-5 h-5" />
+            <X className="w-5 h-5" />
           </a>
           <a 
             href="https://github.com/Sivolc2" 

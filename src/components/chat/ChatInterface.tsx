@@ -28,28 +28,33 @@ export const ChatInterface = () => {
     await sendMessage(message);
   };
 
+  const toggleChat = () => {
+    if (hasMessages) {
+      setIsCollapsed(!isCollapsed);
+    }
+  };
+
   return (
     <div className={`fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-blue-500 transition-all duration-300 ease-in-out
       ${isCollapsed ? 'h-[60px]' : hasMessages ? 'h-[40vh]' : 'h-[120px]'}`}>
       
-      {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b border-blue-500">
+      {/* Header - now entirely clickable */}
+      <div 
+        onClick={toggleChat}
+        className={`flex items-center justify-between p-3 border-b border-blue-500 cursor-pointer hover:bg-gray-800 transition-colors ${hasMessages ? '' : 'cursor-default'}`}
+      >
         <div className="flex items-center gap-2 text-blue-400">
           <MessageCircle className="w-5 h-5" />
           <span className="font-mono text-sm">Chat Assistant</span>
         </div>
         {hasMessages && (
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="text-blue-400 hover:text-blue-300 transition-colors"
-            aria-label={isCollapsed ? "Expand chat" : "Collapse chat"}
-          >
+          <div className="text-blue-400">
             {isCollapsed ? (
               <ChevronUp className="w-5 h-5" />
             ) : (
               <ChevronDown className="w-5 h-5" />
             )}
-          </button>
+          </div>
         )}
       </div>
 
