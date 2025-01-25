@@ -12,6 +12,7 @@ import { TopNav } from './TopNav';
 import { ProfileSection } from './ProfileSection';
 import { ProjectCard } from './ProjectCard';
 import { ProjectsAndAwards } from './projects/ProjectsAndAwards';
+import { StarfallBackground } from './StarfallBackground';
 
 interface Project {
   id: number;
@@ -292,6 +293,7 @@ const MainLayout = () => {
   return (
     <ChatProvider>
       <div className="min-h-screen bg-gray-900 text-gray-300 pb-20">
+        <StarfallBackground />
         <TopNav />
         <div className="container mx-auto p-4 space-y-8">
           <ProfileSection />

@@ -279,7 +279,17 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
 
   return (
     <div className="relative bg-gray-900 p-6 border border-blue-500 rounded-lg overflow-hidden" ref={containerRef}>
-      <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">Project Graph</h2>
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-blue-900/20 animate-gradient-x" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_50%,rgba(56,189,248,0.1),transparent_100%)] animate-pulse-slow" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_400px_at_70%_30%,rgba(168,85,247,0.1),transparent_100%)] animate-pulse-slower" />
+        </div>
+      </div>
+
+      <h2 className="relative text-xl font-mono font-bold text-blue-400 mb-4">Project Graph</h2>
       <div className="relative" style={{ height: containerHeight }}>
         <div className="absolute inset-0">
           <ForceGraph2D
