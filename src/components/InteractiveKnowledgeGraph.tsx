@@ -226,16 +226,29 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
       // First fit to view
       forceRef.current.zoomToFit(400);
       
-      // Then zoom in by 20%
+      // Then zoom in by 20% and ensure forces are reapplied
       setTimeout(() => {
         const currentScale = forceRef.current?.zoom();
         if (currentScale) {
           forceRef.current?.zoom(currentScale * 1.6, 400);
         }
-        // Reapply rotation after zoom
+        
+        // Restart the force simulation with full energy
+        forceRef.current?.d3Force('charge')?.strength(-1500);
+        forceRef.current?.d3Force('radial')?.strength(0.8);
+        
+        // Reapply rotation
         setupRotation();
-        // Restart the simulation to ensure forces are applied
+        
+        // Ensure the simulation is running with high alpha
+        forceRef.current?.d3ReheatSimulation();
         forceRef.current?.resumeAnimation();
+        
+        // Double-check forces are running after a short delay
+        setTimeout(() => {
+          setupRotation();
+          forceRef.current?.resumeAnimation();
+        }, 100);
       }, 450);
     }
   };
