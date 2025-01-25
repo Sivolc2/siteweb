@@ -1,25 +1,7 @@
-'use client';
-
 import React, { useState } from 'react';
-import { Menu, MessageCircle, Github, Linkedin, Twitter, Trophy, ExternalLink, Video, FileText } from 'lucide-react';
-import Image from 'next/image';
+import { Trophy, Github, ExternalLink, Video, FileText } from 'lucide-react';
 import { projectData } from '@/data/projects';
-import type { HackathonProject, PersonalProject, Presentation, ProjectLink, SubPresentation } from '@/types/projects';
-import InteractiveKnowledgeGraph from './InteractiveKnowledgeGraph';
-import { ChatProvider } from './chat/ChatContext';
-import { ChatInterface } from './chat/ChatInterface';
-import { TopNav } from './TopNav';
-import { ProfileSection } from './ProfileSection';
-import { ProjectCard } from './ProjectCard';
-import { ProjectsAndAwards } from './projects/ProjectsAndAwards';
-
-interface Project {
-  id: number;
-  name: string;
-  icon: string;
-  description: string;
-  tags: string[];
-}
+import type { HackathonProject, PersonalProject, Presentation, SubPresentation } from '@/types/projects';
 
 type ProjectTab = 'hackathon' | 'personal' | 'presentations';
 
@@ -262,63 +244,29 @@ const PresentationCard = ({ presentation }: { presentation: Presentation }) => (
   </div>
 );
 
-const MainLayout = () => {
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
-  
-  const projects = [
-    {
-      id: 1,
-      name: 'Post-Scarcity Economics',
-      icon: '📈',
-      description: 'Research organization exploring economic frameworks in the age of automation',
-      tags: ['Economics', 'AI', 'Research', 'Policy', 'Future of Work']
-    },
-    {
-      id: 2,
-      name: 'Framework Zero',
-      icon: '🔗',
-      description: 'Trust through cooperation frameworks with liquid democracy',
-      tags: ['Governance', 'Democracy', 'Systems Design', 'Cooperation']
-    },
-    {
-      id: 3,
-      name: 'Digital Twin',
-      icon: '🤖',
-      description: 'Personal AI assistant development and integration framework',
-      tags: ['AI', 'Software', 'Knowledge Management']
-    }
-  ];
+export const ProjectsAndAwards = () => {
+  const [activeTab, setActiveTab] = useState<ProjectTab>('hackathon');
 
   return (
-    <ChatProvider>
-      <div className="min-h-screen bg-gray-900 text-gray-300 pb-20">
-        <TopNav />
-        <div className="container mx-auto p-4 space-y-8">
-          <ProfileSection />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.map(project => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                isActive={activeProject?.id === project.id}
-                onClick={() => setActiveProject(project)}
-              />
-            ))}
-          </div>
-
-          <InteractiveKnowledgeGraph
-            hackathonProjects={projectData.hackathonProjects}
-            personalProjects={projectData.personalProjects}
-            presentations={projectData.presentations}
-          />
-          <ProjectsAndAwards />
-        </div>
-        
-        <ChatInterface />
+    <div className="bg-gray-900 p-6 border border-blue-500 rounded-lg">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h2 className="text-xl font-mono font-bold text-blue-400">Projects & Awards</h2>
+        <ProjectTabs activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-    </ChatProvider>
-  );
-};
 
-export default MainLayout; 
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {activeTab === 'hackathon' && projectData.hackathonProjects.map((project) => (
+          <HackathonProjectCard key={project.title} project={project} />
+        ))}
+        
+        {activeTab === 'personal' && projectData.personalProjects.map((project) => (
+          <PersonalProjectCard key={project.title} project={project} />
+        ))}
+
+        {activeTab === 'presentations' && projectData.presentations.map((presentation) => (
+          <PresentationCard key={presentation.title} presentation={presentation} />
+        ))}
+      </div>
+    </div>
+  );
+}; 
