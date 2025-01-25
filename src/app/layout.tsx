@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Clovis Vinant-Tang - Portfolio',
-  description: 'Innovator at the intersection of AI, environmental science, and economic systems.',
+  description: 'Innovator at the intersection of AI, space tech, and economic systems.',
 };
 
 export default function RootLayout({

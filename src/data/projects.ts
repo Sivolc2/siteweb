@@ -8,7 +8,7 @@ export const projectData: {
   hackathonProjects: [
     {
       title: "Humanoid Robotics Control",
-      description: "VR-controlled robotic hand for humanoid platforms",
+      description: "VR-controlled robotic hand for humanoid robot platforms",
       award: "1st Place @Khacks",
       event: "K-Scale Labs",
       tags: ["Robotics", "VR", "Control Systems"]
@@ -29,7 +29,7 @@ export const projectData: {
     },
     {
         title: "Voice-to-Action Robotics",
-        description: "Natural language interface for robot control",
+        description: "LLM embodied robotic control on humanoid platform.",
         award: "2nd Place @Khacks",
         event: "K-Scale Labs",
         tags: ["NLP", "Robotics", "Voice"]
@@ -111,7 +111,7 @@ export const projectData: {
     },
     {
       title: "Anthacks",
-      description: "LLM agent for business creation",
+      description: "LLM agent for quickstarting a business",
       event: "Anthropic Hackathon",
       links: {
         github: "https://github.com/Sivolc2/anthacks_streamlit"

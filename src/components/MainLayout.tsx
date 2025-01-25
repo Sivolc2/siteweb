@@ -53,8 +53,11 @@ const ProfileSection = () => (
           Clovis Vinant-Tang
         </h1>
         <p className="text-gray-300 font-mono max-w-2xl mb-4">
-          Innovator at the intersection of AI, space tech, and economic systems. 
-          Focused on developing intelligent solutions for complex global challenges.
+          Builder at the intersection of AI, space tech, and economic systems!
+          <br />
+          
+          <br />
+          Focused on developing intelligent solutions for the Post-Labor Economy.
         </p>
         <div className="flex gap-4">
           <a 

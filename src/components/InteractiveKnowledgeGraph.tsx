@@ -219,14 +219,18 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
         }
       }).strength(0.6));
 
-      // Initial centering
-      handleResetView();
+      // Add a small delay to ensure the graph is properly initialized
+      const timer = setTimeout(() => {
+        handleResetView();
+      }, 500);
+
+      return () => clearTimeout(timer);
     }
   }, []);
 
   return (
     <div className="relative bg-gray-900 p-6 border border-blue-500 rounded-lg overflow-hidden" ref={containerRef}>
-      <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">Knowledge Graph</h2>
+      <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">Project Graph</h2>
       <div className="h-[600px] relative">
         <ForceGraph2D
           ref={forceRef}
