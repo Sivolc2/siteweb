@@ -40,7 +40,7 @@ const ProjectTabs = ({
       onClick={() => onTabChange('hackathon')}
     />
     <TabButton
-      label="Personal"
+      label="Projects"
       isActive={activeTab === 'personal'}
       onClick={() => onTabChange('personal')}
     />
