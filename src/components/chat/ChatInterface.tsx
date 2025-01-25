@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ReactNode } from 'react';
 import { MessageCircle, Send, Loader2, ChevronDown, ChevronUp } from 'lucide-react';
 import { useChat } from './ChatContext';
+import ReactMarkdown from 'react-markdown';
+import type { Components } from 'react-markdown';
 
 export const ChatInterface = () => {
   const { messages, sendMessage, isLoading, error } = useChat();
@@ -72,7 +74,36 @@ export const ChatInterface = () => {
                           : 'bg-blue-600 text-white'
                       }`}
                     >
-                      <p className="text-sm break-words">{msg.content}</p>
+                      <div className="text-sm break-words">
+                        <ReactMarkdown
+                          components={{
+                            p: ({ node, children, ...props }) => (
+                              <p className="mb-1 last:mb-0" {...props}>{children}</p>
+                            ),
+                            pre: ({ node, children, ...props }) => (
+                              <pre className="bg-black/30 p-2 rounded my-1 overflow-x-auto" {...props}>
+                                {children}
+                              </pre>
+                            ),
+                            code: ({ node, children, ...props }) => (
+                              <code className="bg-black/30 px-1 py-0.5 rounded font-mono text-xs" {...props}>
+                                {children}
+                              </code>
+                            ),
+                            ul: ({ node, children, ...props }) => (
+                              <ul className="list-disc ml-4 my-1" {...props}>{children}</ul>
+                            ),
+                            ol: ({ node, children, ...props }) => (
+                              <ol className="list-decimal ml-4 my-1" {...props}>{children}</ol>
+                            ),
+                            li: ({ node, children, ...props }) => (
+                              <li className="my-0.5" {...props}>{children}</li>
+                            ),
+                          }}
+                        >
+                          {msg.content.trim().replace(/\n{3,}/g, '\n\n')}
+                        </ReactMarkdown>
+                      </div>
                     </div>
                   </div>
                 ))}
