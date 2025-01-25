@@ -185,9 +185,9 @@ const ProjectsAndAwards = () => {
 
   return (
     <div className="bg-gray-900 p-6 border border-blue-500 rounded-lg">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h2 className="text-xl font-mono font-bold text-blue-400">Projects & Awards</h2>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <button
             onClick={() => setActiveTab('hackathon')}
             className={`px-4 py-2 rounded-lg font-mono text-sm transition-all ${
