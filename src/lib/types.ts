@@ -1,32 +1,18 @@
-export type ProjectCategory = 'hackathon' | 'personal' | 'research';
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  category: ProjectCategory;
-  technologies: string[];
-  links: {
-    github?: string;
-    demo?: string;
-    article?: string;
-  };
-  media: {
-    thumbnail: string;
-    images?: string[];
-    video?: string;
-  };
+export interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: number;
 }
 
-export interface Analytics {
-  pageViews: number;
-  uniqueVisitors: number;
-  averageTimeOnPage: number;
+export interface ChatState {
+  messages: Message[];
+  isLoading: boolean;
+  error: string | null;
 }
 
-export interface RateLimitConfig {
-  maxRequests: number;
-  windowMs: number;
-  blockDuration: number;
+export interface ChatContextType {
+  messages: Message[];
+  sendMessage: (content: string, onToken?: (token: string) => void) => Promise<void>;
+  isLoading: boolean;
+  error: string | null;
 } 
