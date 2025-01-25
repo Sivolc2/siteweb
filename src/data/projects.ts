@@ -141,8 +141,7 @@ export const projectData: {
     {
       title: "Post-Labor Economics",
       description: "Research organization exploring economic frameworks in the age of automation",
-      tags: ["Economics", "AI", "Research"],
-      featured: true
+      tags: ["Economics", "AI", "Research"]
     },
     {
       title: "Vaulter",
@@ -217,7 +216,7 @@ export const projectData: {
     },
     {
       title: "eRA",
-      description: "Pose detection system for physical therapy patient monitoring",
+      description: "Pose detection system for physical therapy patient exercises",
       links: {
         github: "https://github.com/zerfuth/eRA"
       },
