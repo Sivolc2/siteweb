@@ -6,7 +6,6 @@ import { Message } from '@/lib/types';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 // Debug environment variables
-console.log('Full API Key:', ANTHROPIC_API_KEY);
 console.log('API Key length:', ANTHROPIC_API_KEY?.length);
 
 if (!ANTHROPIC_API_KEY) {
@@ -35,7 +34,7 @@ export async function POST(request: Request) {
 
     // Create stream
     const stream = await anthropic.messages.create({
-      model: 'claude-3-sonnet-20240229',
+      model: 'claude-3-5-sonnet-latest',
       max_tokens: 1024,
       system: systemPrompt,
       messages: messages.map(msg => ({
