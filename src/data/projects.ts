@@ -216,6 +216,14 @@ export const projectData: {
       tags: ["Climate", "ML"]
     },
     {
+      title: "eRA",
+      description: "Pose detection system for physical therapy patient monitoring",
+      links: {
+        github: "https://github.com/zerfuth/eRA"
+      },
+      tags: ["Computer Vision", "Healthcare", "AI"]
+    },
+    {
       title: "McGill Space Group Payload Lead",
       description: "Led team developing low cost star tracker and lobster eye X-ray telescope design",
       links: {
