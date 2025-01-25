@@ -50,7 +50,7 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
   useEffect(() => {
     const updateHeight = () => {
       const vh = window.innerHeight;
-      const maxHeight = Math.min(600, vh * 0.6); // 60% of viewport height, max 600px
+      const maxHeight = Math.min(600, vh * 0.4); // 60% of viewport height, max 600px
       setContainerHeight(maxHeight);
     };
 
