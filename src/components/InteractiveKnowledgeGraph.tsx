@@ -201,6 +201,26 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
     };
   }, [hackathonProjects, personalProjects, presentations]);
 
+  const setupRotation = () => {
+    if (forceRef.current) {
+      let angle = 0;
+      const rotationSpeed = 0.001;
+
+      forceRef.current.d3Force('rotation', () => {
+        angle += rotationSpeed;
+        graphData.nodes.forEach((node: GraphNode) => {
+          if (node.group !== 'central') {
+            const distance = Math.sqrt(Math.pow((node.x || 0), 2) + Math.pow((node.y || 0), 2));
+            const currentAngle = Math.atan2(node.y || 0, node.x || 0);
+            const newAngle = currentAngle + rotationSpeed;
+            node.x = distance * Math.cos(newAngle);
+            node.y = distance * Math.sin(newAngle);
+          }
+        });
+      });
+    }
+  };
+
   const handleResetView = () => {
     if (forceRef.current) {
       // First fit to view
@@ -212,7 +232,11 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
         if (currentScale) {
           forceRef.current?.zoom(currentScale * 1.6, 400);
         }
-      }, 450); // Slightly less than the initial animation time
+        // Reapply rotation after zoom
+        setupRotation();
+        // Restart the simulation to ensure forces are applied
+        forceRef.current?.resumeAnimation();
+      }, 450);
     }
   };
 
@@ -241,22 +265,8 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
         }
       }).strength(0.8));
 
-      // Add rotation effect
-      let angle = 0;
-      const rotationSpeed = 0.001; // Adjust this value to control rotation speed
-
-      forceRef.current.d3Force('rotation', () => {
-        angle += rotationSpeed;
-        graphData.nodes.forEach((node: GraphNode) => {
-          if (node.group !== 'central') { // Don't rotate the central node
-            const distance = Math.sqrt(Math.pow((node.x || 0), 2) + Math.pow((node.y || 0), 2));
-            const currentAngle = Math.atan2(node.y || 0, node.x || 0);
-            const newAngle = currentAngle + rotationSpeed;
-            node.x = distance * Math.cos(newAngle);
-            node.y = distance * Math.sin(newAngle);
-          }
-        });
-      });
+      // Setup initial rotation
+      setupRotation();
 
       // Add a small delay to ensure the graph is properly initialized
       const timer = setTimeout(() => {
