@@ -130,7 +130,7 @@ export const ChatInterface = () => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask Clovis any project questions..."
+                  placeholder="Ask Clovis' Twin any project questions..."
                   className="flex-1 bg-gray-800 border border-gray-700 rounded px-4 py-2 text-gray-300 text-sm font-mono focus:outline-none focus:border-blue-400"
                   disabled={isLoading}
                 />

@@ -11,6 +11,9 @@ export const projectData: {
       description: "VR-controlled robotic hand for humanoid robot platforms",
       award: "1st Place @Khacks",
       event: "K-Scale Labs",
+      links: {
+        github: "https://github.com/Sivolc2/kscale_hacks_no2"
+      },
       tags: ["Robotics", "VR", "Control Systems"]
     },
     {
@@ -31,14 +34,18 @@ export const projectData: {
         description: "LLM embodied robotic control on humanoid platform.",
         award: "2nd Place @Khacks",
         event: "K-Scale Labs",
+        links: {
+          github: "https://github.com/Sivolc2/kscale_hacks_dec_2024"
+        },
         tags: ["NLP", "Robotics", "Voice"]
       },
     {
-      title: "Physics AI",
-      description: "Wolfram prize AI and physics project",
+      title: "UniversR",
+      description: "Autonomously creating hypergraphs from physics research papers scraped from arxiv",
       award: "Wolfram Research Prize @AIxPhysics",
       links: {
-        event: "https://partiful.com/e/timOBcWEfCj34i8zP8Fe"
+        event: "https://partiful.com/e/timOBcWEfCj34i8zP8Fe",
+        github: "https://github.com/Sivolc2/universal_universer"
       },
       tags: ["AI", "Physics"]
     },
@@ -47,7 +54,8 @@ export const projectData: {
       description: "Toolchain from human 2nd brain (Obsidian) to guide autonomous agents",
       event: "AI for Thought",
       links: {
-        event: "https://partiful.com/e/CVnyIG9KtDXVyBmmGvcI"
+        event: "https://partiful.com/e/CVnyIG9KtDXVyBmmGvcI",
+        github: "https://github.com/Sivolc2/digital_twin"
       },
       tags: ["AI", "Knowledge Graphs", "Agents"]
     },
@@ -56,7 +64,8 @@ export const projectData: {
       description: "Interactive LLM for conversational support",
       event: "AI in Motion - Studio 45",
       links: {
-        event: "https://lu.ma/0930-ai-in-motion-hack?tk=Y4VNHS"
+        event: "https://lu.ma/0930-ai-in-motion-hack?tk=Y4VNHS",
+        github: "https://github.com/wolfhound115/the-face-and-audio-book"
       },
       tags: ["XR", "AI", "Healthcare"]
     },
@@ -65,7 +74,8 @@ export const projectData: {
       description: "Autonomous supply chain logistics optimization",
       award: "2nd Place @AGI House",
       links: {
-        event: "https://partiful.com/e/uYzDzXUstD8D8kvuA8Zl"
+        event: "https://partiful.com/e/uYzDzXUstD8D8kvuA8Zl",
+        github: "https://github.com/Sivolc2/auto_wing_hacks"
       },
       tags: ["AI", "Logistics"]
     },
@@ -95,6 +105,7 @@ export const projectData: {
       description: "Turn text into memory palaces using diffusion models",
       event: "Redpoint Imagine @AGI House",
       links: {
+        github: "https://github.com/Sivolc2/redpoint_hacks",
         event: "https://partiful.com/e/6EysR58EnhyDGXX57uao"
       },
       tags: ["AI", "Memory"]
