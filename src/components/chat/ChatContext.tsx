@@ -80,6 +80,66 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   const sendMessage = async (content: string, onToken?: (token: string) => void) => {
     try {
+      // Check if the message is related to doing work or tasks
+      const workRelatedPatterns = [
+        // Direct code requests
+        'write code',
+        'code for',
+        'write a program',
+        'create a script',
+        'build an app',
+        'develop a',
+        'implement',
+        'coding assignment',
+        'homework',
+        
+        // Debug/fix requests
+        'debug',
+        'fix my code',
+        'solve this error',
+        'help with my code',
+        
+        // General work requests
+        'do my',
+        'help me with my',
+        'complete my',
+        'finish my',
+        
+        // Project requests
+        'my project',
+        'school project',
+        'work project',
+        'assignment',
+        
+        // Programming tasks
+        'function to',
+        'program that',
+        'script to',
+      ];
+
+      const isWorkRequest = workRelatedPatterns.some(pattern => 
+        content.toLowerCase().includes(pattern.toLowerCase())
+      );
+
+      if (isWorkRequest) {
+        const responses = [
+          "I'm focused on discussing this website and its projects. I can't help with external coding tasks or assignments, but I'd be happy to tell you about the technologies and approaches used here!",
+          "I'm designed to chat about this website's features and implementation. While I can't help with external work or coding tasks, I can explain how similar features were built here.",
+          "Let's keep our discussion focused on this website! I can't assist with external work or coding tasks, but I can share insights about the technologies and patterns used in this site."
+        ];
+        
+        dispatch({
+          type: 'ADD_MESSAGE',
+          payload: {
+            role: 'assistant',
+            content: responses[Math.floor(Math.random() * responses.length)],
+            timestamp: Date.now()
+          }
+        });
+        dispatch({ type: 'SET_LOADING', payload: false });
+        return;
+      }
+
       dispatch({ type: 'SET_LOADING', payload: true });
       
       // Add user message
