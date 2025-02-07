@@ -348,7 +348,7 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
               
-              // Add text shadow for better visibility
+              // Draw text shadow
               ctx.fillStyle = 'rgba(0,0,0,0.8)';
               ctx.fillText(
                 label,
@@ -361,7 +361,7 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
               );
               
               // Draw main text
-              ctx.fillStyle = node.group === 'central' ? '#F59E0B' : 'white';
+              ctx.fillStyle = 'white';
               ctx.fillText(
                 label,
                 node.x || 0,
