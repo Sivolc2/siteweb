@@ -341,7 +341,7 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
                 12 / globalScale;
               
               // Add text shadow for better visibility
-              ctx.font = `${node.group === 'central' ? 'bold' : 'normal'} ${fontSize}px Inter`;
+              ctx.font = `${node.group === 'central' ? 'bold' : ''} ${fontSize}px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`;
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
               
