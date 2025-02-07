@@ -4,6 +4,9 @@ import React, { useRef, useEffect, useMemo, useState } from 'react';
 import ForceGraph2D, { ForceGraphMethods, NodeObject, LinkObject } from 'react-force-graph-2d';
 import { HackathonProject, PersonalProject, Presentation } from '@/types/projects';
 import * as d3 from 'd3';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 interface GraphNode extends NodeObject {
   id: string;
@@ -340,12 +343,12 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
                 node.group === 'category' ? 16 / globalScale :
                 12 / globalScale;
               
-              // Add text shadow for better visibility
-              ctx.font = `${node.group === 'central' ? 'bold' : ''} ${fontSize}px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`;
+              // Set font with Inter
+              ctx.font = `${node.group === 'central' ? '500' : '400'} ${fontSize}px ${inter.style.fontFamily}`;
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
               
-              // Draw text shadow
+              // Add text shadow for better visibility
               ctx.fillStyle = 'rgba(0,0,0,0.8)';
               ctx.fillText(
                 label,
@@ -358,7 +361,7 @@ const InteractiveKnowledgeGraph: React.FC<InteractiveKnowledgeGraphProps> = ({
               );
               
               // Draw main text
-              ctx.fillStyle = 'white';
+              ctx.fillStyle = node.group === 'central' ? '#F59E0B' : 'white';
               ctx.fillText(
                 label,
                 node.x || 0,
