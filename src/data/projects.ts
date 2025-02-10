@@ -17,16 +17,6 @@ export const projectData: {
       tags: ["Robotics", "VR", "Control Systems"]
     },
     {
-      title: "Urban Forest AI",
-      description: "AI-driven platform for optimizing urban greening and climate resilience through strategic tree planting and land reclamation",
-      event: "Climate Hack",
-      links: {
-        event: "https://lu.ma/1ixp727l?tk=HFMF74",
-        demo: "https://www.loom.com/share/7043456acbe84043b228ab57c36fc67f"
-      },
-      tags: ["AI", "Climate", "Urban Planning", "Geoengineering"]
-    },
-    {
       title: "Arboren",
       description: "AI-powered geospatial analysis platform for UN policy",
       award: "1st Place @AI For Good",
@@ -58,6 +48,17 @@ export const projectData: {
         github: "https://github.com/Sivolc2/universal_universer"
       },
       tags: ["AI", "Physics"]
+    },
+    {
+      title: "Urban Forest AI",
+      description: "AI-driven platform for optimizing urban greening and climate resilience through strategic tree planting and land reclamation",
+      event: "Climate Hack",
+      links: {
+        event: "https://lu.ma/1ixp727l?tk=HFMF74",
+        demo: "https://www.loom.com/share/7043456acbe84043b228ab57c36fc67f",
+        github:"https://github.com/ai-geo-forest-vision/forest-vision-dashboard"
+      },
+      tags: ["AI", "Climate", "Urban Planning", "Geoengineering"]
     },
     {
       title: "Brain²",
