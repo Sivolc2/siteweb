@@ -13,6 +13,7 @@ export interface ChatState {
 export interface ChatContextType {
   messages: Message[];
   sendMessage: (content: string, onToken?: (token: string) => void) => Promise<void>;
+  addAssistantMessage: (content: string) => void;
   isLoading: boolean;
   error: string | null;
 } 

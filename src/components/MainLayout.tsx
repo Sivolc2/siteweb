@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { projectData } from '@/data/projects';
 import type { HackathonProject, PersonalProject, Presentation, ProjectLink, SubPresentation } from '@/types/projects';
 import InteractiveKnowledgeGraph from './InteractiveKnowledgeGraph';
-import { ChatProvider } from './chat/ChatContext';
+import { ChatProvider, useChat } from './chat/ChatContext';
 import { ChatInterface } from './chat/ChatInterface';
 import { TopNav } from './TopNav';
 import { ProfileSection } from './ProfileSection';
@@ -19,6 +19,7 @@ interface Project {
   name: string;
   icon: string;
   description: string;
+  longDescription: string;
   tags: string[];
 }
 
@@ -71,222 +72,56 @@ const ProjectTabs = ({
   </div>
 );
 
-const HackathonProjectCard = ({ project }: { project: HackathonProject }) => (
-  <div
-    key={project.title}
-    className="p-4 bg-gray-800/80 rounded-lg border border-gray-700 hover:border-blue-400 transition-all"
-  >
-    <div className="flex items-start justify-between mb-2">
-      <div>
-        <h3 className="font-mono font-bold text-blue-400">{project.title}</h3>
-        {project.award && (
-          <div className="flex items-center gap-2 text-yellow-400 text-sm mb-2">
-            <Trophy className="w-4 h-4" />
-            <span>{project.award}</span>
-          </div>
-        )}
-        {project.event && (
-          <div className="text-gray-400 text-sm mb-2">
-            {project.event}
-          </div>
-        )}
-      </div>
-      {project.links && (
-        <div className="flex gap-2">
-          {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-          )}
-          {project.links.demo && (
-            <a
-              href={project.links.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
-          {project.links.event && (
-            <a
-              href={project.links.event}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
-        </div>
-      )}
-    </div>
-    <p className="text-sm text-gray-300 mb-3">{project.description}</p>
-    <div className="flex flex-wrap gap-2">
-      {project.tags.map((tag: string) => (
-        <span
-          key={tag}
-          className="text-xs bg-black/30 px-2 py-1 rounded-full text-blue-300"
-        >
-          {tag}
-        </span>
+const ProjectGrid = ({ projects }: { projects: Project[] }) => {
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const { addAssistantMessage } = useChat();
+  
+  const handleProjectClick = (project: Project) => {
+    setActiveProject(project);
+    if (project.id === 3) { // Digital Twin project
+      addAssistantMessage("Hi! I'm a digital twin assistant, trained to understand and discuss Clovis' projects and experiences. How can I help you today?");
+    }
+  };
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {projects.map(project => (
+        <ProjectCard
+          key={project.id}
+          project={project}
+          isActive={activeProject?.id === project.id}
+          onClick={() => handleProjectClick(project)}
+        />
       ))}
     </div>
-  </div>
-);
-
-const PersonalProjectCard = ({ project }: { project: PersonalProject }) => (
-  <div
-    key={project.title}
-    className="p-4 bg-gray-800/80 rounded-lg border border-gray-700 hover:border-blue-400 transition-all"
-  >
-    <div className="flex items-start justify-between mb-2">
-      <div>
-        <h3 className="font-mono font-bold text-blue-400">{project.title}</h3>
-        {project.featured && (
-          <div className="text-yellow-400 text-sm mb-2">Featured Project</div>
-        )}
-      </div>
-      {project.links && (
-        <div className="flex gap-2">
-          {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-          )}
-          {project.links.website && (
-            <a
-              href={project.links.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
-        </div>
-      )}
-    </div>
-    <p className="text-sm text-gray-300 mb-3">{project.description}</p>
-    <div className="flex flex-wrap gap-2">
-      {project.tags.map((tag: string) => (
-        <span
-          key={tag}
-          className="text-xs bg-black/30 px-2 py-1 rounded-full text-blue-300"
-        >
-          {tag}
-        </span>
-      ))}
-    </div>
-  </div>
-);
-
-const PresentationCard = ({ presentation }: { presentation: Presentation }) => (
-  <div
-    key={presentation.title}
-    className="p-4 bg-gray-800/80 rounded-lg border border-gray-700 hover:border-blue-400 transition-all"
-  >
-    <div className="flex items-start justify-between mb-2">
-      <h3 className="font-mono font-bold text-blue-400">{presentation.title}</h3>
-      <div className="flex gap-2">
-        {presentation.links?.video && (
-          <a
-            href={presentation.links.video}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300"
-          >
-            <Video className="w-4 h-4" />
-          </a>
-        )}
-        {presentation.links?.slides && (
-          <a
-            href={presentation.links.slides}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300"
-          >
-            <FileText className="w-4 h-4" />
-          </a>
-        )}
-      </div>
-    </div>
-    {presentation.description && (
-      <p className="text-sm text-gray-300 mb-3">{presentation.description}</p>
-    )}
-    {presentation.presentations && (
-      <div className="mt-2 space-y-2">
-        {presentation.presentations.map((subPresentation: SubPresentation) => (
-          <div
-            key={subPresentation.title}
-            className="pl-4 border-l-2 border-blue-500"
-          >
-            <div className="flex items-center justify-between">
-              <h4 className="text-sm font-mono text-blue-300">{subPresentation.title}</h4>
-              {subPresentation.links?.slides && (
-                <a
-                  href={subPresentation.links.slides}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300"
-                >
-                  <FileText className="w-4 h-4" />
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    )}
-    {presentation.tags && (
-      <div className="flex flex-wrap gap-2 mt-3">
-        {presentation.tags.map((tag: string) => (
-          <span
-            key={tag}
-            className="text-xs bg-black/30 px-2 py-1 rounded-full text-blue-300"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    )}
-  </div>
-);
+  );
+};
 
 const MainLayout = () => {
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
-  
   const projects = [
     {
       id: 1,
-      name: 'Post-Scarcity Economics',
+      name: 'Post-Labor Economics',
       icon: '📈',
-      description: 'Research organization exploring economic frameworks in the age of automation',
-      tags: ['Economics', 'AI', 'Research', 'Policy', 'Future of Work']
+      description: 'Building the infrastructure and theory for a post-labor economy driven by automation and AI',
+      longDescription: 'A research and development initiative focused on creating the operating system for a post-labor economy. We are developing frameworks for autonomous companies, preference aggregation systems, and economic structures that work beyond traditional labor markets. Our goal is to demonstrate how automation and AI can create abundance while ensuring equitable distribution and human flourishing. Key areas include digital twin systems for preference mapping, autonomous organization design, and transparent economic frameworks.',
+      tags: ['Economics', 'AI', 'Automation', 'Future of Work', 'Research']
     },
     {
       id: 2,
       name: 'Framework Zero',
       icon: '🔗',
-      description: 'Trust through cooperation frameworks with liquid democracy',
-      tags: ['Governance', 'Democracy', 'Systems Design', 'Cooperation']
+      description: 'A new framework for human cooperation and acceleration in the age of AI',
+      longDescription: 'Framework Zero reimagines human cooperation for the AI era. We are developing systems that combine liquid democracy, preference aggregation, and trust mechanisms to enable more effective collective decision-making. The project focuses on creating transparent, gamified structures for cooperation that can scale from small groups to global systems. Core components include decentralized science initiatives, autonomous company foundations, and mechanisms for translating human preferences into actionable metrics.',
+      tags: ['Governance', 'Cooperation', 'Systems Design', 'Trust Systems', 'AI Integration']
     },
     {
       id: 3,
       name: 'Digital Twin',
       icon: '🤖',
-      description: 'Personal AI assistant development and integration framework',
-      tags: ['AI', 'Software', 'Knowledge Management']
+      description: 'Try the chat assistant below - an early experiment in digital twin technology',
+      longDescription: 'An exploration into creating AI assistants that truly understand and represent individual knowledge and preferences. This website features an early prototype: the chat assistant below that understands my projects, experiences, and thoughts. Future development focuses on more sophisticated preference learning, contextual understanding, and autonomous decision-making capabilities. The goal is to create digital twins that can effectively represent individuals in various contexts, from personal assistance to economic decision-making.',
+      tags: ['AI', 'Digital Twin', 'Knowledge Systems', 'Human-AI Interaction']
     }
   ];
 
@@ -297,18 +132,7 @@ const MainLayout = () => {
         <TopNav />
         <div className="container mx-auto p-4 space-y-8">
           <ProfileSection />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.map(project => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                isActive={activeProject?.id === project.id}
-                onClick={() => setActiveProject(project)}
-              />
-            ))}
-          </div>
-
+          <ProjectGrid projects={projects} />
           <InteractiveKnowledgeGraph
             hackathonProjects={projectData.hackathonProjects}
             personalProjects={projectData.personalProjects}
@@ -316,7 +140,6 @@ const MainLayout = () => {
           />
           <ProjectsAndAwards />
         </div>
-        
         <ChatInterface />
       </div>
     </ChatProvider>

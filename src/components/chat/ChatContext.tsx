@@ -93,6 +93,13 @@ ${JSON.stringify(projectsData, null, 2)}`;
     loadContext();
   }, []);
 
+  const addAssistantMessage = (content: string) => {
+    dispatch({
+      type: 'ADD_MESSAGE',
+      payload: { role: 'assistant', content, timestamp: Date.now() },
+    });
+  };
+
   const sendMessage = async (content: string, onToken?: (token: string) => void) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
@@ -193,6 +200,7 @@ ${JSON.stringify(projectsData, null, 2)}`;
       value={{
         messages: state.messages,
         sendMessage,
+        addAssistantMessage,
         isLoading: state.isLoading,
         error: state.error,
       }}
