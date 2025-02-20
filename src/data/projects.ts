@@ -106,6 +106,15 @@ export const projectData: {
       tags: ["Governance", "Transparency"]
     },
     {
+      title: "Agent AI Hack Night",
+      description: "Building AI agent solutions using cutting-edge models like DeepSeek R1 and V3, with tools from Weaviate, VESSL AI, FireworksAI, and CrewAI",
+      event: "SF Bay Area Builders",
+      links: {
+        event: "https://github.com/Sivolc2/agent_ai_hack_night_github"
+      },
+      tags: ["AI", "Agents", "LLMs"]
+    },
+    {
       title: "OTT - Organizational Transparency Tools",
       description: "Transparency tools for DAO+Autonomous company toolchain",
       event: "Nvidia x Vercel Hack",
