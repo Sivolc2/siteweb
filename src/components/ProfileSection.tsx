@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { X, Github, Linkedin } from 'lucide-react';
+import { X, Github, Instagram } from 'lucide-react';
 
 export const ProfileSection = () => {
   const [isQRExpanded, setIsQRExpanded] = useState(false);
@@ -58,12 +58,12 @@ export const ProfileSection = () => {
               <Github className="w-5 h-5" />
             </a>
             <a 
-              href="https://www.linkedin.com/in/clovis-vinant-tang/" 
+              href="https://www.instagram.com/sivolc11/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 transition-colors"
             >
-              <Linkedin className="w-5 h-5" />
+              <Instagram className="w-5 h-5" />
             </a>
           </div>
         </div>

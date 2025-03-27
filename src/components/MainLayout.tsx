@@ -74,12 +74,14 @@ const ProjectTabs = ({
 
 const ProjectGrid = ({ projects }: { projects: Project[] }) => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [hasShownWelcome, setHasShownWelcome] = useState(false);
   const { addAssistantMessage } = useChat();
   
   const handleProjectClick = (project: Project) => {
     setActiveProject(project);
-    if (project.id === 3) { // Digital Twin project
+    if (project.id === 3 && !hasShownWelcome) { // Digital Twin project
       addAssistantMessage("Hi! I'm a digital twin assistant, trained to understand and discuss Clovis' projects and experiences. How can I help you today?");
+      setHasShownWelcome(true);
     }
   };
 

@@ -5,8 +5,8 @@ const { createCanvas, loadImage } = require('canvas');
 
 async function generateCustomQR() {
   try {
-    const url = 'https://clovisvt.vercel.app/';
-    const outputPath = path.join(__dirname, '../public/cvt_website_qr.png');
+    const url = 'https://framework-zero.com/';
+    const outputPath = path.join(__dirname, '../public/framework-zero-qr.png');
 
     // First generate QR code with transparent background
     const options = {
