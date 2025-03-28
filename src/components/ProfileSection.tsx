@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { X, Github, Instagram } from 'lucide-react';
+import { X, Github, Instagram, Linkedin } from 'lucide-react';
 
 export const ProfileSection = () => {
   const [isQRExpanded, setIsQRExpanded] = useState(false);
@@ -40,30 +40,42 @@ export const ProfileSection = () => {
             <br />
             Focused on developing intelligent solutions for the Post-Labor Economy!🚀
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-2">
+            <a 
+              href="https://www.linkedin.com/in/clovis-vinant-tang/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2"
+            >
+              <Linkedin className="w-5 h-5" />
+              <span className="font-mono">- LinkedIn</span>
+            </a>
             <a 
               href="https://twitter.com/clovisvinant" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
+              className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2"
             >
               <X className="w-5 h-5" />
+              <span className="font-mono">- Twitter</span>
             </a>
             <a 
               href="https://github.com/Sivolc2" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
+              className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2"
             >
               <Github className="w-5 h-5" />
+              <span className="font-mono">- GitHub</span>
             </a>
             <a 
               href="https://www.instagram.com/sivolc11/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
+              className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2"
             >
               <Instagram className="w-5 h-5" />
+              <span className="font-mono">- Instagram</span>
             </a>
           </div>
         </div>
