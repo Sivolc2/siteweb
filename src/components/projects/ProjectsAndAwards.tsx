@@ -109,9 +109,9 @@ const HackathonProjectCard = ({ project }: { project: HackathonProject }) => (
 
       {/* Second button: Project/Demo link - using Globe icon */}
       <div className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors">
-        {project.links?.project ? (
+        {project.links?.website ? (
           <a
-            href={project.links.project}
+            href={project.links.website}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-full h-full bg-green-600 hover:bg-green-500 rounded-lg"

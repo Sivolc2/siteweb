@@ -13,7 +13,7 @@ export const projectData: {
       event: "AGI House",
       links: {
         event: "https://partiful.com/e/8xzzr8g76SQ3bAWUifgX",
-        project: "https://aimibot.me/",
+        website: "https://aimibot.me/",
         video: "https://youtu.be/XoppaX2IZzY?t=2955"
       },
       tags: ["AI", "Wearable", "Hardware"]
