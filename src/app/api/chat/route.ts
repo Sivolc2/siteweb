@@ -54,7 +54,8 @@ export async function POST(request: Request) {
         }))
       ],
       stream: true,
-      extra_headers: {
+    }, {
+      headers: {
         "HTTP-Referer": YOUR_SITE_URL,
         "X-Title": YOUR_APP_NAME
       }
