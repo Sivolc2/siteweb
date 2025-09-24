@@ -7,12 +7,36 @@ export const projectData: {
 } = {
   hackathonProjects: [
     {
+      title: "AIMibot Companion",
+      description: "Wearable AI companion with 6 personality tribes that learns and grows with you - sold $1.6k in preorders in 24 hours",
+      award: "1st Place @Build-a-Company-a-Thon",
+      event: "AGI House",
+      links: {
+        event: "https://partiful.com/e/8xzzr8g76SQ3bAWUifgX",
+        project: "https://aimibot.me/",
+        video: "https://youtu.be/XoppaX2IZzY?t=2955"
+      },
+      tags: ["AI", "Wearable", "Hardware"]
+    },
+    {
+      title: "Exocortex",
+      description: "AI knowledge aggregation system that connects Obsidian, Notion, and Discord to spawn autonomous agents for task execution",
+      award: "1st Place @AI for Thought",
+      event: "AI for Thought",
+      links: {
+        event: "https://partiful.com/e/7Uc3o5n8uyXOcKPAy012",
+        github: "https://github.com/Sivolc2/exocortex"
+      },
+      tags: ["AI", "Knowledge Management", "Autonomous Agents", "NLP"]
+    },
+    {
       title: "Humanoid Robotics Control",
       description: "VR-controlled robotic hand for humanoid robot platforms",
       award: "1st Place @Khacks",
       event: "K-Scale Labs",
       links: {
-        github: "https://github.com/Sivolc2/kscale_hacks_no2"
+        github: "https://github.com/Sivolc2/kscale_hacks_no2",
+        event: "https://luma.com/khacks.0.3?tk=Urgj0A"
       },
       tags: ["Robotics", "VR", "Control Systems"]
     },
@@ -26,7 +50,9 @@ export const projectData: {
         github: "https://github.com/yourusername/arboren",
         demo: "https://arboren-ai.com/home",
         devpost: "https://devpost.com/software/green-policy-agent",
-        press: "https://www.sfchronicle.com/bayarea/article/hack-for-social-impact-ai-19887830.php"
+        press: "https://www.sfchronicle.com/bayarea/article/hack-for-social-impact-ai-19887830.php",
+        video: "https://www.loom.com/share/f5d03f84e26543c19500425aeb965a99?sid=cd3e7488-9831-424c-bf1a-ad4f3c0f907f",
+        event: "https://luma.com/454w7i8p?tk=E7hKBg"
       }
     },
     {
@@ -35,7 +61,9 @@ export const projectData: {
         award: "2nd Place @Khacks",
         event: "K-Scale Labs",
         links: {
-          github: "https://github.com/Sivolc2/kscale_hacks_dec_2024"
+          github: "https://github.com/Sivolc2/kscale_hacks_dec_2024",
+          event: "https://luma.com/khacks.0.2?tk=rMaB4W",
+          demo: "https://x.com/kscalelabs/status/1870209855107248478"
         },
         tags: ["NLP", "Robotics", "Voice"]
       },
@@ -45,7 +73,8 @@ export const projectData: {
       award: "Wolfram Research Prize @AIxPhysics",
       links: {
         event: "https://partiful.com/e/timOBcWEfCj34i8zP8Fe",
-        github: "https://github.com/Sivolc2/universal_universer"
+        github: "https://github.com/Sivolc2/universal_universer",
+        demo: "https://www.loom.com/share/302c99bc232f4044be3621dead6da96c?sid=9c62570c-cc78-4560-9ea0-07d9f556fb9f"
       },
       tags: ["AI", "Physics"]
     },
@@ -55,7 +84,7 @@ export const projectData: {
       event: "Climate Hack",
       links: {
         event: "https://lu.ma/1ixp727l?tk=HFMF74",
-        demo: "https://www.loom.com/share/7043456acbe84043b228ab57c36fc67f",
+        demo: "https://www.loom.com/share/7043456acbe84043b228ab57c36fc67f?sid=5f5ae657-7bfd-4cd7-8735-d73450209c00",
         github:"https://github.com/ai-geo-forest-vision/forest-vision-dashboard"
       },
       tags: ["AI", "Climate", "Urban Planning", "Geoengineering"]
@@ -101,7 +130,9 @@ export const projectData: {
       description: "Tools for government transparency in San Fransisco",
       event: "Accelerate SF",
       links: {
-        github: "https://github.com/Sivolc2/accelerate_sf_hackathon"
+        github: "https://github.com/Sivolc2/accelerate_sf_hackathon",
+        devpost: "https://devpost.com/software/poliscope?_gl=1*1r7rn22*_gcl_au*MTg4MTg5Mzc0OS4xNzU4NzU2MjQ1*_ga*MTUwNTkxMDUzMy4xNzU4NzU2MjQ1*_ga_0YHJK3Y10M*czE3NTg3NTYyNDQkbzEkZzEkdDE3NTg3NTY0MDMkajUzJGwwJGgw",
+        event: "https://accelerate-sf.devpost.com/"
       },
       tags: ["Governance", "Transparency"]
     },

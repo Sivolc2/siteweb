@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, Github, ExternalLink, Video, FileText } from 'lucide-react';
+import { Trophy, Github, ExternalLink, Video, FileText, Calendar, Globe } from 'lucide-react';
 import { projectData } from '@/data/projects';
 import type { HackathonProject, PersonalProject, Presentation, SubPresentation } from '@/types/projects';
 
@@ -57,66 +57,113 @@ const HackathonProjectCard = ({ project }: { project: HackathonProject }) => (
     key={project.title}
     className="p-4 bg-gray-800/80 rounded-lg border border-gray-700 hover:border-blue-400 transition-all"
   >
-    <div className="flex items-start justify-between mb-2">
-      <div>
-        <h3 className="font-mono font-bold text-blue-400">{project.title}</h3>
-        {project.award && (
-          <div className="flex items-center gap-2 text-yellow-400 text-sm mb-2">
-            <Trophy className="w-4 h-4" />
-            <span>{project.award}</span>
-          </div>
-        )}
-        {project.event && (
-          <div className="text-gray-400 text-sm mb-2">
-            {project.event}
-          </div>
-        )}
-      </div>
-      {project.links && (
-        <div className="flex gap-2">
-          {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-          )}
-          {project.links.demo && (
-            <a
-              href={project.links.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
-          {project.links.event && (
-            <a
-              href={project.links.event}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
+    <div className="mb-2">
+      <h3 className="font-mono font-bold text-blue-400">{project.title}</h3>
+      {project.award && (
+        <div className="flex items-center gap-2 text-yellow-400 text-sm mb-2">
+          <Trophy className="w-4 h-4" />
+          <span>{project.award}</span>
+        </div>
+      )}
+      {project.event && (
+        <div className="text-gray-400 text-sm mb-2">
+          {project.event}
         </div>
       )}
     </div>
-    <p className="text-sm text-gray-300 mb-3">{project.description}</p>
-    <div className="flex flex-wrap gap-2">
+
+    {/* Tags moved above description */}
+    <div className="flex flex-wrap gap-1 mb-3">
       {project.tags.map((tag: string) => (
         <span
           key={tag}
-          className="text-xs bg-black/30 px-2 py-1 rounded-full text-blue-300"
+          className="text-xs bg-black/30 px-2 py-0.5 rounded-full text-blue-300"
         >
           {tag}
         </span>
       ))}
+    </div>
+
+    <p className="text-sm text-gray-300 mb-4">{project.description}</p>
+
+    {/* Links with consistent spacing - always show 3 buttons */}
+    <div className="flex gap-3 justify-center">
+      {/* First button: Event link - using Calendar icon */}
+      <div className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors">
+        {project.links?.event ? (
+          <a
+            href={project.links.event}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full bg-blue-600 hover:bg-blue-500 rounded-lg"
+            title="Event"
+          >
+            <Calendar className="w-5 h-5 text-white" />
+          </a>
+        ) : (
+          <div className="flex items-center justify-center w-full h-full bg-gray-700 rounded-lg opacity-30">
+            <Calendar className="w-5 h-5 text-gray-500" />
+          </div>
+        )}
+      </div>
+
+      {/* Second button: Project/Demo link - using Globe icon */}
+      <div className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors">
+        {project.links?.project ? (
+          <a
+            href={project.links.project}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full bg-green-600 hover:bg-green-500 rounded-lg"
+            title="Project"
+          >
+            <Globe className="w-5 h-5 text-white" />
+          </a>
+        ) : project.links?.demo ? (
+          <a
+            href={project.links.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full bg-green-600 hover:bg-green-500 rounded-lg"
+            title="Demo"
+          >
+            <Globe className="w-5 h-5 text-white" />
+          </a>
+        ) : (
+          <div className="flex items-center justify-center w-full h-full bg-gray-700 rounded-lg opacity-30">
+            <Globe className="w-5 h-5 text-gray-500" />
+          </div>
+        )}
+      </div>
+
+      {/* Third button: Video/Github link */}
+      <div className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors">
+        {project.links?.video ? (
+          <a
+            href={project.links.video}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full bg-red-600 hover:bg-red-500 rounded-lg"
+            title="Video"
+          >
+            <Video className="w-5 h-5 text-white" />
+          </a>
+        ) : project.links?.github ? (
+          <a
+            href={project.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full bg-purple-600 hover:bg-purple-500 rounded-lg"
+            title="GitHub"
+          >
+            <Github className="w-5 h-5 text-white" />
+          </a>
+        ) : (
+          <div className="flex items-center justify-center w-full h-full bg-gray-700 rounded-lg opacity-30">
+            <Github className="w-5 h-5 text-gray-500" />
+          </div>
+        )}
+      </div>
     </div>
   </div>
 );

@@ -1,23 +1,23 @@
 import { NextResponse } from 'next/server';
-import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 import { Message } from '@/lib/types';
 
 // Validate environment variables
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const YOUR_SITE_URL = process.env.YOUR_SITE_URL || "http://localhost:3000";
+const YOUR_APP_NAME = process.env.YOUR_APP_NAME || "Personal Website Chat";
 
 // Debug environment variables
-console.log('API Key length:', ANTHROPIC_API_KEY?.length);
+console.log('OpenRouter API Key length:', OPENROUTER_API_KEY?.length);
 
-if (!ANTHROPIC_API_KEY) {
-  throw new Error('ANTHROPIC_API_KEY is not set in environment variables');
+if (!OPENROUTER_API_KEY) {
+  throw new Error('OPENROUTER_API_KEY is not set in environment variables');
 }
 
-// Initialize Anthropic with API key from server environment
-const anthropic = new Anthropic({
-  apiKey: ANTHROPIC_API_KEY,
-  defaultHeaders: {
-    'anthropic-version': '2023-06-01'
-  }
+// Initialize OpenAI client with OpenRouter
+const client = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: OPENROUTER_API_KEY,
 });
 
 export async function POST(request: Request) {
@@ -40,17 +40,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid request format' }, { status: 400 });
     }
 
-    console.log('🤖 Initializing Anthropic stream...');
+    console.log('🤖 Initializing OpenRouter stream...');
     // Create stream
-    const stream = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-latest',
+    const stream = await client.chat.completions.create({
+      model: 'google/gemini-flash-1.5',
       max_tokens: 1024,
-      system: systemPrompt,
-      messages: messages.map(msg => ({
-        role: msg.role,
-        content: msg.content,
-      })),
+      temperature: 0.7,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages.map(msg => ({
+          role: msg.role,
+          content: msg.content,
+        }))
+      ],
       stream: true,
+      extra_headers: {
+        "HTTP-Referer": YOUR_SITE_URL,
+        "X-Title": YOUR_APP_NAME
+      }
     });
     console.log('✅ Stream initialized successfully');
 
@@ -63,17 +70,16 @@ export async function POST(request: Request) {
           
           console.log('📤 Starting stream processing...');
           for await (const chunk of stream) {
-            if (chunk.type === 'content_block_delta' && 
-                'delta' in chunk && 
-                'text' in chunk.delta) {
+            if (chunk.choices && chunk.choices[0] && chunk.choices[0].delta && chunk.choices[0].delta.content) {
               chunkCount++;
-              totalTextLength += chunk.delta.text.length;
-              
+              const text = chunk.choices[0].delta.content;
+              totalTextLength += text.length;
+
               if (chunkCount % 50 === 0) {
                 console.log(`🔄 Stream progress: ${chunkCount} chunks, ${totalTextLength} chars total`);
               }
-              
-              const data = JSON.stringify({ text: chunk.delta.text });
+
+              const data = JSON.stringify({ text });
               controller.enqueue(encoder.encode(`data: ${data}\n\n`));
             }
           }
@@ -108,31 +114,20 @@ export async function POST(request: Request) {
 
   } catch (error) {
     // Enhanced error logging
-    if (error instanceof Anthropic.APIError) {
-      console.error('❌ Anthropic API Error:', {
-        status: error.status,
+    console.error('❌ OpenRouter API Error:', {
+      error: error instanceof Error ? {
+        name: error.name,
         message: error.message,
-        response: error.error,
-        headers: error.headers,
-        timestamp: new Date().toISOString(),
-        type: 'AnthropicAPIError'
-      });
-    } else {
-      console.error('❌ Unexpected error:', {
-        error: error instanceof Error ? {
-          name: error.name,
-          message: error.message,
-          stack: error.stack,
-        } : error,
-        timestamp: new Date().toISOString(),
-        type: 'UnexpectedError'
-      });
-    }
+        stack: error.stack,
+      } : error,
+      timestamp: new Date().toISOString(),
+      type: 'OpenRouterAPIError'
+    });
 
     // Handle authentication errors
-    if (error instanceof Anthropic.APIError && error.status === 401) {
+    if (error instanceof Error && error.message.includes('401')) {
       return NextResponse.json(
-        { error: 'Authentication failed with AI service. Please check API key configuration.' },
+        { error: 'Authentication failed with OpenRouter. Please check API key configuration.' },
         { status: 500 }
       );
     }

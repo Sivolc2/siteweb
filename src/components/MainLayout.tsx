@@ -13,6 +13,7 @@ import { ProfileSection } from './ProfileSection';
 import { ProjectCard } from './ProjectCard';
 import { ProjectsAndAwards } from './projects/ProjectsAndAwards';
 import { StarfallBackground } from './StarfallBackground';
+import { TableOfContents } from './TableOfContents';
 
 interface Project {
   id: number;
@@ -129,18 +130,36 @@ const MainLayout = () => {
 
   return (
     <ChatProvider>
-      <div className="min-h-screen bg-gray-900 text-gray-300 pb-20">
+      <div className="min-h-screen bg-gray-900 text-gray-300 pb-20 scroll-smooth snap-y snap-mandatory overflow-y-auto">
         <StarfallBackground />
         <TopNav />
         <div className="container mx-auto p-4 space-y-8">
-          <ProfileSection />
-          <ProjectGrid projects={projects} />
-          <InteractiveKnowledgeGraph
-            hackathonProjects={projectData.hackathonProjects}
-            personalProjects={projectData.personalProjects}
-            presentations={projectData.presentations}
-          />
-          <ProjectsAndAwards />
+          {/* Profile Section */}
+          <section id="profile">
+            <ProfileSection />
+          </section>
+
+          {/* Table of Contents */}
+          <TableOfContents />
+
+          {/* Projects Section */}
+          <section id="projects">
+            <ProjectGrid projects={projects} />
+          </section>
+
+          {/* Knowledge Graph Section */}
+          <section id="knowledge-graph">
+            <InteractiveKnowledgeGraph
+              hackathonProjects={projectData.hackathonProjects}
+              personalProjects={projectData.personalProjects}
+              presentations={projectData.presentations}
+            />
+          </section>
+
+          {/* Projects & Awards Section */}
+          <section id="projects-awards">
+            <ProjectsAndAwards />
+          </section>
         </div>
         <ChatInterface />
       </div>
