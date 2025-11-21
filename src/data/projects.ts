@@ -7,7 +7,7 @@ export const projectData: {
 } = {
   hackathonProjects: [
     {
-      title: "Ad Infinitum",
+      title: "Ads Infinitum",
       description: "Autonomous product-discovery engine that generates ideas, tests them with real Meta ads, learns from human response, and promotes validated concepts into a public Kickstarter-style marketplace",
       award: "1st Place @Self-Evolving Agents Hack",
       event: "Self-Evolving Agents Hack",
