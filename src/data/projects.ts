@@ -13,7 +13,7 @@ export const projectData: {
       event: "Self-Evolving Agents Hack",
       links: {
         github: "https://github.com/Sivolc2/ads-infinitum",
-        demo: "https://bit.ly/devpost-n15",
+        demo: "https://self-evolving-agents-hack.devpost.com/",
         event: "https://luma.com/agentshack?tk=rCRY6s"
       },
       tags: ["AI", "Autonomous Agents", "Meta Ads", "Product Discovery", "React"]
