@@ -7,6 +7,18 @@ export const projectData: {
 } = {
   hackathonProjects: [
     {
+      title: "Ad Infinitum",
+      description: "Autonomous product-discovery engine that generates ideas, tests them with real Meta ads, learns from human response, and promotes validated concepts into a public Kickstarter-style marketplace",
+      award: "1st Place @Self-Evolving Agents Hack",
+      event: "Self-Evolving Agents Hack",
+      links: {
+        github: "https://github.com/Sivolc2/ads-infinitum",
+        demo: "https://meta-genesis-lab.lovable.app",
+        event: "https://luma.com/agentshack?tk=rCRY6s"
+      },
+      tags: ["AI", "Autonomous Agents", "Meta Ads", "Product Discovery", "React"]
+    },
+    {
       title: "AIMibot Companion",
       description: "Wearable AI companion with 6 personality tribes that learns and grows with you - sold $1.6k in preorders in 24 hours",
       award: "1st Place @Build-a-Company-a-Thon",
